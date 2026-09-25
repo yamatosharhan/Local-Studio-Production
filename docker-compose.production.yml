@@ -1,0 +1,33 @@
+services:
+  local-studio:
+    build: .
+    ports:
+      - "127.0.0.1:4173:4173"
+    environment:
+      LOCAL_STUDIO_VERSION: 8.0.0-production
+      LOCAL_STUDIO_RUNTIME_BACKEND: docker
+      LOCAL_STUDIO_ALLOW_HOST_RUNTIME: "false"
+      OLLAMA_BASE_URL: http://host.docker.internal:11434
+      LOCAL_STUDIO_WORKSPACE_ROOT: /app/storage/projects
+      LOCAL_STUDIO_DATA_ROOT: /app/storage
+    volumes:
+      - ./storage:/app/storage
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD","python","-c","import urllib.request; urllib.request.urlopen('http://127.0.0.1:4173/api/health', timeout=3).read()"]
+      interval: 20s
+      timeout: 5s
+      retries: 5
+  collaboration:
+    build:
+      context: ./collab
+      dockerfile: Dockerfile
+    ports:
+      - "127.0.0.1:1234:1234"
+    environment:
+      LOCAL_STUDIO_COLLAB_PORT: 1234
+      LOCAL_STUDIO_DATA_ROOT: /data
+    volumes:
+      - ./storage:/data
+    restart: unless-stopped
