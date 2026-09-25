@@ -1,0 +1,8 @@
+{
+  "name": "Local Studio",
+  "version": "8.0.0-production",
+  "channel": "production-candidate",
+  "local_first": true,
+  "capabilities": ["live-dom-editor","source-roundtrip","autonomous-repair","docker-sandbox","resource-governor","arabic-rtl","design-system-index","ast","browser-e2e","visual-regression","mcp-governance","local-memory","git-scm","figma","multimodal","collaboration","recovery","desktop"],
+  "release_line": "v8"
+}
