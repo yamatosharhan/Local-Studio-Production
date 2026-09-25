@@ -1,0 +1,14 @@
+{
+  "release": "8.0.0-production",
+  "status": "production-candidate",
+  "core_ok": true,
+  "release_ready": false,
+  "core_tests": "37 passed",
+  "blocked_host_gates": [
+    "frontend dependencies/typecheck/build",
+    "Docker Engine",
+    "Playwright localhost smoke",
+    "Ollama"
+  ],
+  "note": "The source repository contains CI workflows for these host gates; this report records the environment in which the release candidate was verified."
+}
